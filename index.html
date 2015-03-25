@@ -14,6 +14,8 @@
         height: 100%;
       }
     </style>
+    <script type="text/javascript" src="src/animacao.js"></script>
+    <script type="text/javascript" src="src/bola.js"></script>
   </head>
   <body>
     <canvas id="game_canvas">
@@ -24,73 +26,28 @@
         ;
       
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight
+      canvas.height = window.innerHeight;
       
-      console.log(canvas.width);
-      console.log(canvas.height);
+      var b1 = new Bola(context);
+      b1.x = 100;
+      b1.y = 200;
+      b1.velocidadeX = 20;
+      b1.velocidadeY = -10;
+      b1.cor = 'red';
+      b1.raio = 20;
       
-      // Desenha o OVNI
-      var ovni = new Image();
-      ovni.src = 'img/ovni.png';
-      ovni.onload = function() {
-        var x = 20
-          , width = 64
-          , height = 32;
-        for (var i = 0; i < 5; i++) {
-          context.drawImage(ovni, x, 20, width, height);
-          x += 70;
-        }
-      };
+      var b2 = new Bola(context);
+      b2.x = 200;
+      b2.y = 100;
+      b2.velocidadeX = -10;
+      b2.velocidadeY = 20;
+      b2.cor = 'blue';
+      b2.raio = 30;
       
-      // Desenha o Spritesheet
-      var explosao = new Image();
-      explosao.src = 'img/explosao.png';
-      explosao.onload = function() {
-        context.drawImage(explosao, 
-                          // Área de recorte
-                          80, 10, 60, 65,
-                          // Desenho no canvas
-                          20, 64, 60, 65);
-      };
-      
-      var x = 0;
-      var y = 0;
-      var dx = 10, qx = 1;
-      var dy = 10, qy = 1;
-      var anterior = new Date().getTime();
-      
-      
-      function mecherExplosao() {
-        var agora = new Date().getTime()
-          , decorrido = agora - anterior;
-        
-        console.log(anterior);
-        console.log(agora);
-        console.log(decorrido);
-        
-        anterior = agora;
-        
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(explosao, 
-                          // Área de recorte
-                          80, 10, 60, 65,
-                          // Desenho no canvas
-                          x, y, 60, 65);
-        var fps = 1000/ 60;
-        
-        x += (dx * decorrido / fps) * qx;
-        y += (dy * decorrido / fps) * qy;
-        
-        if (x > canvas.width - 60 || x < 0) {
-          qx *= -1; 
-        }
-        
-        if (y > canvas.height - 65 || y < 0) {
-          qy *= -1; 
-        }
-        requestAnimationFrame(mecherExplosao);
-      }
-      requestAnimationFrame(mecherExplosao);
+      var animacao = new Animacao(context);
+      animacao.novoSprite(b1);
+      animacao.novoSprite(b2);
+      animacao.ligar();
     </script>
   </body>
 </html>
