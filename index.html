@@ -36,12 +36,7 @@
       var heroi = new Heroi(context, teclado, animacao);
       heroi.x = 0;
       heroi.y = 100;
-      animacao.novoSprite(heroi);
-      
-      teclado.disparou(Teclado.ESPACO, function() {
-        heroi.atirar();
-      });
-      
+      animacao.novoSprite(heroi);      
       animacao.ligar();
     </script>
   </body>
