@@ -26,7 +26,7 @@ var Heroi = (function() {
       tiro.raio = 2;
       tiro.cor = 'red';
       
-      if (this.teclado.pressionada[Teclado.SETA_ESQUERDA]) {
+      if (this.teclado.pressionada(Teclado.SETA_ESQUERDA)) {
         tiro.velocidadeX = -20; 
       } else {
         tiro.velocidadeX = 20; 

@@ -1,9 +1,5 @@
 var Teclado = (function() {
-  function Teclado(elemento) {
-    this.SETA_ESQUERDA = 37;
-    this.SETA_DIREITA = 39;
-    this.ESPACO = 32;
-    
+  function Teclado(elemento) {    
     this.elemento = elemento;
     
     this.pressionadas = [];
@@ -13,8 +9,6 @@ var Teclado = (function() {
     var teclado = this;
     elemento.addEventListener('keydown', function(e) {      
       teclado.pressionadas[e.keyCode] = true;
-      
-      console.log(teclado.funcoesDisparo);
       
       if (teclado.funcoesDisparo[e.keyCode] && !teclado.disparadas[e.keyCode]) {
         teclado.disparadas[e.keyCode] = true;
@@ -27,6 +21,10 @@ var Teclado = (function() {
       teclado.disparadas[e.keyCode] = false;
     });
   }
+  
+  Teclado.SETA_ESQUERDA = 37;
+  Teclado.SETA_DIREITA = 39;
+  Teclado.ESPACO = 32;
   
   Teclado.prototype = {
     pressionada: function(tecla) {
