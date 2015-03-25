@@ -14,8 +14,10 @@
         height: 100%;
       }
     </style>
+    <script type="text/javascript" src="src/heroi.js"></script>
     <script type="text/javascript" src="src/animacao.js"></script>
     <script type="text/javascript" src="src/bola.js"></script>
+    <script type="text/javascript" src="src/teclado.js"></script>
   </head>
   <body>
     <canvas id="game_canvas">
@@ -28,25 +30,18 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      var b1 = new Bola(context);
-      b1.x = 100;
-      b1.y = 200;
-      b1.velocidadeX = 20;
-      b1.velocidadeY = -10;
-      b1.cor = 'red';
-      b1.raio = 20;
-      
-      var b2 = new Bola(context);
-      b2.x = 200;
-      b2.y = 100;
-      b2.velocidadeX = -10;
-      b2.velocidadeY = 20;
-      b2.cor = 'blue';
-      b2.raio = 30;
-      
+      var teclado = new Teclado(document);
       var animacao = new Animacao(context);
-      animacao.novoSprite(b1);
-      animacao.novoSprite(b2);
+      
+      var heroi = new Heroi(context, teclado, animacao);
+      heroi.x = 0;
+      heroi.y = 100;
+      animacao.novoSprite(heroi);
+      
+      teclado.disparou(Teclado.ESPACO, function() {
+        heroi.atirar();
+      });
+      
       animacao.ligar();
     </script>
   </body>
