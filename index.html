@@ -14,10 +14,10 @@
         height: 100%;
       }
     </style>
-    <script type="text/javascript" src="src/heroi.js"></script>
     <script type="text/javascript" src="src/animacao.js"></script>
-    <script type="text/javascript" src="src/bola.js"></script>
     <script type="text/javascript" src="src/teclado.js"></script>
+    <script type="text/javascript" src="src/spritesheet.js"></script>
+    <script type="text/javascript" src="src/sonic.js"></script>
   </head>
   <body>
     <canvas id="game_canvas">
@@ -30,27 +30,21 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      var imgSonic = new Image();
+      var teclado = new Teclado(document)
+        , animacao = new Animacao(context)
+        , imgSonic = new Image();  
+        ;
       imgSonic.src = 'img/spritesheet.png';
+      
+      var sonic = new Sonic(context, teclado, imgSonic);
+      sonic.x = 0;
+      sonic.y = 200;
+      
+      animacao.novoSprite(sonic);
       imgSonic.onload = function() {
-        var linhas = 3;
-        var colunas = 8;
-        
-        var largura = imgSonic.width / colunas;
-        var altura = imgSonic.height / linhas;
-        
-        var queroLinha = 0;
-        var queroColuna = 1;
-        
-        var x = largura * queroColuna;
-        var y = altura * queroLinha;
-        
-        
-        console.log(x);
-        console.log(y);
-        
-        context.drawImage(imgSonic, x, y, largura, altura, 100, 100, largura, altura);
+        animacao.ligar();  
       };
+      
     </script>
   </body>
 </html>
