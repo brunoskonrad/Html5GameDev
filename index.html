@@ -1,7 +1,7 @@
 <!DOCTYPE hmtl>
 <html>
   <head>
-    <title>Capítulo 1</title>
+    <title>Capítulo 4</title>
     <meta charset="UTF-8">
     
     <style>
@@ -30,14 +30,27 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      var teclado = new Teclado(document);
-      var animacao = new Animacao(context);
-      
-      var heroi = new Heroi(context, teclado, animacao);
-      heroi.x = 0;
-      heroi.y = 100;
-      animacao.novoSprite(heroi);      
-      animacao.ligar();
+      var imgSonic = new Image();
+      imgSonic.src = 'img/spritesheet.png';
+      imgSonic.onload = function() {
+        var linhas = 3;
+        var colunas = 8;
+        
+        var largura = imgSonic.width / colunas;
+        var altura = imgSonic.height / linhas;
+        
+        var queroLinha = 0;
+        var queroColuna = 1;
+        
+        var x = largura * queroColuna;
+        var y = altura * queroLinha;
+        
+        
+        console.log(x);
+        console.log(y);
+        
+        context.drawImage(imgSonic, x, y, largura, altura, 100, 100, largura, altura);
+      };
     </script>
   </body>
 </html>
