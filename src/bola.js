@@ -29,6 +29,32 @@ window.Bola = (function() {
       this.context.arc(this.x, this.y, this.raio, 0, 2 * Math.PI, false);
       this.context.fill();
       this.context.restore();
+    },
+    retangulosColisao: function() {
+      return [
+        {
+          x: this.x - this.raio,
+          y: this.y - this.raio,
+          largura: this.raio * 2,
+          altura: this.raio * 2
+        }
+      ];
+    },
+    colidiuCom: function(sprite) {
+      console.log('PÁ');
+    },
+    stringUnica: function() {
+      var str = ''
+        , retangulos = this.retangulosColisao()
+        ;
+      for (var i in retangulos) {
+        str += 'x: ' + retangulos[i].x + ',' +
+          'x: ' + retangulos[i].y + ',' +
+          'largura: ' + retangulos[i].largura + ',' +
+          'altura: ' + retangulos[i].altura + '\n';
+      }
+      
+      return str;
     }
   }
   

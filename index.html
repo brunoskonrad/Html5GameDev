@@ -1,7 +1,7 @@
 <!DOCTYPE hmtl>
 <html>
   <head>
-    <title>Capítulo 4</title>
+    <title>Capítulo 5</title>
     <meta charset="UTF-8">
     
     <style>
@@ -14,10 +14,8 @@
         height: 100%;
       }
     </style>
-    <script type="text/javascript" src="src/animacao.js"></script>
-    <script type="text/javascript" src="src/teclado.js"></script>
-    <script type="text/javascript" src="src/spritesheet.js"></script>
-    <script type="text/javascript" src="src/sonic.js"></script>
+    <script type="text/javascript" src="src/bola.js"></script>
+    <script type="text/javascript" src="src/colisor.js"></script>
   </head>
   <body>
     <canvas id="game_canvas">
@@ -30,20 +28,38 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      var teclado = new Teclado(document)
-        , animacao = new Animacao(context)
-        , imgSonic = new Image();  
-        ;
-      imgSonic.src = 'img/spritesheet.png';
+      var bola1 = new Bola(context);
+      bola1.x = 200;
+      bola1.y = 200;
+      bola1.velocidadeX = 10 * 4;
+      bola1.velocidadeY = -5 * 4;
+      bola1.cor = 'blue';
+      bola1.raio = 20;
       
-      var sonic = new Sonic(context, teclado, imgSonic);
-      sonic.x = 0;
-      sonic.y = 200;
+      var bola2 = new Bola(context);
+      bola2.x = 300;
+      bola2.y = 300;
+      bola2.velocidadeX = -5 * 4;
+      bola2.velocidadeY = 10 * 4;
+      bola2.cor = 'red';
+      bola2.raio = 30;
       
-      animacao.novoSprite(sonic);
-      imgSonic.onload = function() {
-        animacao.ligar();  
-      };
+      var colisor = new Colisor();
+      colisor.novoSprite(bola2);
+      colisor.novoSprite(bola1);
+      
+      requestAnimationFrame(animacao);
+      function animacao() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        bola1.atualizar();
+        bola2.atualizar();
+        
+        bola1.desenhar();
+        bola2.desenhar();
+        
+        colisor.processar();
+        requestAnimationFrame(animacao);
+      }
       
     </script>
   </body>
