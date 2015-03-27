@@ -12,13 +12,13 @@ window.Bola = (function() {
     atualizar: function() {
       if (this.x < this.raio || this.x >
           this.context.canvas.width - this.raio) {
-        this.velocidadeX *= -1; 
+        this.velocidadeX *= -1;
       }
       if (this.y < this.raio || this.y >
           this.context.canvas.height - this.raio) {
         this.velocidadeY *= -1;
       }
-      
+
       this.x += this.velocidadeX;
       this.y += this.velocidadeY;
     },
@@ -41,7 +41,17 @@ window.Bola = (function() {
       ];
     },
     colidiuCom: function(sprite) {
-      console.log('PÁ');
+      if (this.x < sprite.x) {
+        this.velocidadeX = -Math.abs(this.velocidadeX);
+      } else {
+        this.velocidadeX = Math.abs(this.velocidadeX);
+      }
+
+      if (this.y < sprite.y) {
+        this.velocidadeY = -Math.abs(this.velocidadeY);
+      } else {
+        this.velocidadeY = Math.abs(this.velocidadeY);
+      }
     },
     stringUnica: function() {
       var str = ''
@@ -53,10 +63,10 @@ window.Bola = (function() {
           'largura: ' + retangulos[i].largura + ',' +
           'altura: ' + retangulos[i].altura + '\n';
       }
-      
+
       return str;
     }
   }
-  
+
   return Bola;
 })();

@@ -13,22 +13,22 @@ window.Animacao = (function() {
       this.proximoFrame();
     },
     desligar: function() {
-      this.ligado = false; 
+      this.ligado = false;
     },
     proximoFrame: function() {
       if (!this.ligado)
         return;
-      
+
       this.limparTela();
-      
+
       for (var i in this.sprites) {
         this.sprites[i].atualizar();
       }
-      
+
       for (var i in this.sprites) {
-        this.sprites[i].desenhar(); 
+        this.sprites[i].desenhar();
       }
-      
+
       var animacao = this;
       requestAnimationFrame(function() {
         animacao.proximoFrame();
@@ -39,6 +39,6 @@ window.Animacao = (function() {
                              this.context.canvas.height);
     }
   };
-  
+
   return Animacao;
 })();
