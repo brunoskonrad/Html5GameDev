@@ -1,9 +1,9 @@
 <!DOCTYPE hmtl>
 <html>
   <head>
-    <title>Capítulo 5</title>
+    <title>Capítulo 6</title>
     <meta charset="UTF-8">
-    
+
     <style>
       body {
         padding: 0;
@@ -21,46 +21,37 @@
     <canvas id="game_canvas">
     </canvas>
     <script>
-      var canvas = document.getElementById("game_canvas")
-        , context = canvas.getContext("2d")
+      var imgEspaco = new Image();
+      imgEspaco.src = 'img/fundo-espaco.png';
+
+      var imgEstrelas = new Image();
+      imgEstrelas.src = 'img/fundo-estrelas.png';
+
+      var imgNuvens = new Image();
+      imgNuvens.src = 'img/fundo-nuvens.png';
+
+      var carregadas = 0
+        , total = 3
         ;
-      
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      
-      var bola1 = new Bola(context);
-      bola1.x = 200;
-      bola1.y = 200;
-      bola1.velocidadeX = 10 * 4;
-      bola1.velocidadeY = -5 * 4;
-      bola1.cor = 'blue';
-      bola1.raio = 20;
-      
-      var bola2 = new Bola(context);
-      bola2.x = 300;
-      bola2.y = 300;
-      bola2.velocidadeX = -5 * 4;
-      bola2.velocidadeY = 10 * 4;
-      bola2.cor = 'red';
-      bola2.raio = 30;
-      
-      var colisor = new Colisor();
-      colisor.novoSprite(bola2);
-      colisor.novoSprite(bola1);
-      
-      requestAnimationFrame(animacao);
-      function animacao() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        bola1.atualizar();
-        bola2.atualizar();
-        
-        bola1.desenhar();
-        bola2.desenhar();
-        
-        colisor.processar();
-        requestAnimationFrame(animacao);
+
+      imgEspaco.onload = carregando;
+      imgEstrelas.onload = carregando;
+      imgNuvens.onload = carregando;
+
+      function carregando() {
+        carregadas++;
+        if (carregadas == total) iniciar();
       }
-      
+
+      function iniciar() {
+        var canvas = document.getElementById("game_canvas")
+          , context = canvas.getContext("2d")
+          ;
+
+        canvas.width = 500;
+        canvas.height = 500;
+      }
+
     </script>
   </body>
 </html>
